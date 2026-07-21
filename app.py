@@ -16,15 +16,21 @@ def get_default_api_key():
 
 
 def fetch_geocoding_data(query, api_key):
-    response = requests.get(
-        OPENWEATHER_GEOCODING_URL,
-        params={"q": query, "limit": 5, "appid": api_key},
-        timeout=15,
-    )
-    if response.status_code == 401:
-        return {"error": "The API key is invalid. Please check it and try again."}
-    if response.status_code != 200:
-        return {"error": f"Unable to fetch data right now (status code {response.status_code})."}
+    try:
+        response = requests.get(
+            OPENWEATHER_GEOCODING_URL,
+            params={"q": query, "limit": 5, "appid": api_key},
+            timeout=15,
+        )
+        response.raise_for_status()
+    except requests.HTTPError:
+        if response.status_code == 401:
+            return {"error": "The API key is invalid. Please check it and try again."}
+        return {
+            "error": f"Unable to fetch data right now (status code {response.status_code})."
+        }
+    except requests.RequestException:
+        return {"error": "Unable to reach OpenWeatherMap right now. Please try again shortly."}
 
     data = response.json()
     if not data:
