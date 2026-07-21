@@ -3,6 +3,7 @@
 Interactive Streamlit app for looking up place names and coordinates with the OpenWeatherMap Geocoding API.
 
 [![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-181717?logo=github)](https://github.com/gituserc1140/Geocoding-Weather-App)
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://geocoding-weather-app-nye6x8ybeq6mnrqy4wkbut.streamlit.app/)
 [![Sponsor me on GitHub](https://img.shields.io/badge/Sponsor%20me%20on-GitHub-EA4AAA?logo=githubsponsors&style=flat-square)](https://github.com/sponsors/gituserc1140)
 
 ## About
