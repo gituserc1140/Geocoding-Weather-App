@@ -43,11 +43,11 @@ def render_location_results(results):
     st.subheader("Results")
     for item in results:
         state = item.get("state")
-        country = item.get("country", "Unknown country")
         location_parts = [item["name"]]
         if state:
             location_parts.append(state)
-        location_parts.append(country)
+        if item.get("country"):
+            location_parts.append(item["country"])
         st.markdown(
             "\n".join(
                 [
