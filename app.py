@@ -20,15 +20,16 @@ def fetch_geocoding_data(query, api_key):
         response = requests.get(
             OPENWEATHER_GEOCODING_URL,
             params={"q": query, "limit": 5, "appid": api_key},
-            timeout=15,
+            timeout=10,
         )
         response.raise_for_status()
-    except requests.HTTPError:
-        if response.status_code == 401:
+    except requests.HTTPError as exc:
+        status_code = exc.response.status_code if exc.response is not None else None
+        if status_code == 401:
             return {"error": "The API key is invalid. Please check it and try again."}
-        return {
-            "error": f"Unable to fetch data right now (status code {response.status_code})."
-        }
+        if status_code is not None:
+            return {"error": f"Unable to fetch data right now (status code {status_code})."}
+        return {"error": "Unable to reach OpenWeatherMap right now. Please try again shortly."}
     except requests.RequestException:
         return {"error": "Unable to reach OpenWeatherMap right now. Please try again shortly."}
 
@@ -64,9 +65,6 @@ def main():
     st.write(
         "Search for cities, regions, and places with your own OpenWeatherMap API key."
     )
-
-    st.link_button("View on GitHub", GITHUB_URL)
-    st.link_button("Sponsor on GitHub", SPONSOR_URL)
 
     st.sidebar.header("Settings")
     api_key_input = st.sidebar.text_input(
