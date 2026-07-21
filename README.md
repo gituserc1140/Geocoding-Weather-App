@@ -18,7 +18,7 @@ This app lets an end user provide an OpenWeatherMap API key directly in the Stre
 
 ## Requirements
 
-- Python
+- Python 3.10 or newer
 - An [OpenWeatherMap API key](https://openweathermap.org/api)
 
 ## Setup
