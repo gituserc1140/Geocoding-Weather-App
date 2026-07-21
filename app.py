@@ -24,7 +24,7 @@ def fetch_geocoding_data(query, api_key):
         )
         response.raise_for_status()
     except requests.HTTPError as exc:
-        status_code = exc.response.status_code if exc.response is not None else None
+        status_code = exc.response.status_code
         if status_code == 401:
             return {
                 "error": (
@@ -32,9 +32,7 @@ def fetch_geocoding_data(query, api_key):
                     "OpenWeatherMap geocoding requests, then try again."
                 )
             }
-        if status_code is not None:
-            return {"error": f"Unable to fetch data right now (status code {status_code})."}
-        return {"error": "Unable to reach OpenWeatherMap right now. Please try again shortly."}
+        return {"error": f"Unable to fetch data right now (status code {status_code})."}
     except requests.RequestException:
         return {"error": "Unable to reach OpenWeatherMap right now. Please try again shortly."}
 
@@ -52,8 +50,14 @@ def fetch_geocoding_data(query, api_key):
 def render_location_results(results):
     st.subheader("Results")
     for item in results:
+        name = item.get("name")
+        latitude = item.get("lat")
+        longitude = item.get("lon")
+        if name is None or latitude is None or longitude is None:
+            continue
+
         state = item.get("state")
-        location_parts = [item["name"]]
+        location_parts = [name]
         if state:
             location_parts.append(state)
         if item.get("country"):
@@ -62,8 +66,8 @@ def render_location_results(results):
             "\n".join(
                 [
                     f"**{', '.join(location_parts)}**",
-                    f"- Latitude: `{item['lat']}`",
-                    f"- Longitude: `{item['lon']}`",
+                    f"- Latitude: `{latitude}`",
+                    f"- Longitude: `{longitude}`",
                 ]
             )
         )
