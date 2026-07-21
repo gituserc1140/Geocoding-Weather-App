@@ -85,6 +85,10 @@ def main():
         type="password",
         help="Paste your API key here to enable geocoding searches.",
     )
+    st.sidebar.markdown(
+        "<small>[Get a free API key](https://openweathermap.org/appid)</small>",
+        unsafe_allow_html=True,
+    )
     st.sidebar.link_button("GitHub Repository", GITHUB_URL)
     st.sidebar.link_button("GitHub Sponsors", SPONSOR_URL)
 
