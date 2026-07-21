@@ -1,4 +1,4 @@
-# Geocoding Weather App
+# Geocoding App
 
 Interactive Streamlit app for looking up place names and coordinates with the OpenWeatherMap Geocoding API.
 
@@ -18,7 +18,7 @@ This app lets an end user provide an OpenWeatherMap API key directly in the Stre
 
 ## Requirements
 
-- Python 3.10 or newer
+- Python 3.9 or newer
 - An [OpenWeatherMap API key](https://openweathermap.org/api)
 
 ## Setup

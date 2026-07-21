@@ -3,7 +3,7 @@ import os
 import requests
 import streamlit as st
 
-APP_TITLE = "Geocoding Weather App"
+APP_TITLE = "Geocoding App"
 GITHUB_URL = "https://github.com/gituserc1140/Geocoding-Weather-App"
 SPONSOR_URL = "https://github.com/sponsors/gituserc1140"
 OPENWEATHER_GEOCODING_URL = "https://api.openweathermap.org/geo/1.0/direct"
@@ -75,7 +75,7 @@ def render_location_results(results):
 
 def main():
     st.set_page_config(page_title=APP_TITLE, page_icon="🌍", layout="centered")
-    st.title("🌍 Geocoding Weather App")
+    st.title("🌍 Geocoding App")
     st.write(
         "Search for cities, regions, and places with your own OpenWeatherMap API key."
     )
