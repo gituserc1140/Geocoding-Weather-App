@@ -4,8 +4,9 @@ import requests
 import streamlit as st
 
 APP_TITLE = "Geocoding App"
-GITHUB_URL = "https://github.com/gituserc1140/Geocoding-Weather-App"
-SPONSOR_URL = "https://github.com/sponsors/gituserc1140"
+GITHUB_USERNAME = "gituserc1140"
+GITHUB_URL = f"https://github.com/{GITHUB_USERNAME}/Geocoding-Weather-App"
+SPONSOR_URL = f"https://github.com/sponsors/{GITHUB_USERNAME}"
 OPENWEATHER_GEOCODING_URL = "https://api.openweathermap.org/geo/1.0/direct"
 
 
