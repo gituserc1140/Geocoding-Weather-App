@@ -26,7 +26,12 @@ def fetch_geocoding_data(query, api_key):
     except requests.HTTPError as exc:
         status_code = exc.response.status_code if exc.response is not None else None
         if status_code == 401:
-            return {"error": "The API key is invalid. Please check it and try again."}
+            return {
+                "error": (
+                    "The API key was rejected. Confirm it is active and enabled for "
+                    "OpenWeatherMap geocoding requests, then try again."
+                )
+            }
         if status_code is not None:
             return {"error": f"Unable to fetch data right now (status code {status_code})."}
         return {"error": "Unable to reach OpenWeatherMap right now. Please try again shortly."}
@@ -35,7 +40,12 @@ def fetch_geocoding_data(query, api_key):
 
     data = response.json()
     if not data:
-        return {"error": "No matching locations were found. Try a broader search."}
+        return {
+            "error": (
+                "No matching locations were found. Check the spelling or try an "
+                "alternative city or place name."
+            )
+        }
     return {"data": data}
 
 
